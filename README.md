@@ -1,1 +1,0 @@
-# aws-amplify-test-app
