@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Auth } from 'aws-amplify'
 import '@aws-amplify/ui/dist/style.css';
-import { AmplifyAuthenticator, AmplifySignUp, AmplifySignOut } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator, AmplifySignIn, AmplifySignUp, AmplifySignOut } from '@aws-amplify/ui-react';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 
 
