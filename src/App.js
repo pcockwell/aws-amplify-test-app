@@ -1,40 +1,30 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from './logo.svg';
 import './App.css';
 import { Auth } from 'aws-amplify'
-import { withAuthenticator } from 'aws-amplify-react'
 import '@aws-amplify/ui/dist/style.css';
+import { AmplifyAuthenticator, AmplifySignUp, AmplifySignOut } from '@aws-amplify/ui-react';
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 
-
-const signUpConfig = {
-  hiddenDefaults: ['username'],
-  signUpFields: [
-    {
-      label: 'Email',
-      key: 'username',
-      required: true,
-      displayOrder: 1,
-      type: 'email',
-      custom: false
-    },
-    {
-      label: 'Password',
-      key: 'password',
-      required: true,
-      displayOrder: 2,
-      type: 'password',
-      custom: false
-    }
-  ]
-};
 
 function App() {
-  return (
+  const [authState, setAuthState] = useState();
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+      return onAuthUIStateChange((nextAuthState, authData) => {
+          setAuthState(nextAuthState);
+          setUser(authData)
+      });
+  }, []);
+
+
+  return authState === AuthState.SignedIn && user ? (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <div>Hello, {user.username}</div>
         </p>
         <a
           className="App-link"
@@ -45,8 +35,21 @@ function App() {
           Learn React
         </a>
       </header>
+      <AmplifySignOut />
     </div>
+    ) : (
+      <AmplifyAuthenticator>
+        <AmplifySignUp
+          slot="sign-up"
+          usernameAlias="email"
+          formFields={[
+            { type: "email" },
+            { type: "password" },
+          ]}
+        />
+        <AmplifySignIn slot="sign-in" usernameAlias="email" />
+      </AmplifyAuthenticator>
   );
 }
 
-export default withAuthenticator(App, { signUpConfig });
+export default App;
