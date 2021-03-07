@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Auth } from 'aws-amplify'
 import { withAuthenticator } from 'aws-amplify-react'
+import '@aws-amplify/ui/dist/style.css';
 
 function App() {
   return (
