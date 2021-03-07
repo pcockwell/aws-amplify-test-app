@@ -1,0 +1,38 @@
+{
+    "paths": [
+        {
+            "name": "/report",
+            "lambdaFunction": "amplifyTestLamdbaFn",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST"
+                ]
+            },
+            "policyResourceName": "/report"
+        }
+    ],
+    "resourceName": "amplifyTestApi",
+    "apiName": "amplifyTestApi",
+    "functionArns": [
+        {
+            "lambdaFunction": "amplifyTestLamdbaFn"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-awsamplifytestapp-dev-141444-authRole",
+        "unAuthRoleName": "amplify-awsamplifytestapp-dev-141444-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "amplifyTestLamdbaFn",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

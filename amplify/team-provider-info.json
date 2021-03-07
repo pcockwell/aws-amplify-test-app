@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "awsamplifytestappfc73acdf": {}
+      },
+      "function": {
+        "amplifyTestLamdbaFn": {
+          "deploymentBucketName": "amplify-awsamplifytestapp-dev-141444-deployment",
+          "s3Key": "amplify-builds/amplifyTestLamdbaFn-457933426f45744c697a-build.zip"
+        }
       }
     }
   }

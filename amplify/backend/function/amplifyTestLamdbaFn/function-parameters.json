@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "storage": {
+      "amplifyTestS3": [
+        "create"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
