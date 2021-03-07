@@ -1,5 +1,8 @@
+import React, { useEffect } from 'react'
 import logo from './logo.svg';
 import './App.css';
+import { Auth } from 'aws-amplify'
+import { withAuthenticator } from 'aws-amplify-react'
 
 function App() {
   return (
@@ -25,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
