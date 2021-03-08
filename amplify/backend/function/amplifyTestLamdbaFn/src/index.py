@@ -1,6 +1,7 @@
 def handler(event, context):
   print('received event:')
   print(event)
+  print(event.body)
   return {
       'statusCode': 200,
       'headers': {
