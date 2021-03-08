@@ -1,15 +1,16 @@
 {
     "paths": [
         {
-            "name": "/report",
+            "name": "/upload",
             "lambdaFunction": "amplifyTestLamdbaFn",
             "privacy": {
                 "private": true,
                 "auth": [
-                    "/POST"
+                    "/PUT",
+                    "/PATCH"
                 ]
             },
-            "policyResourceName": "/report"
+            "policyResourceName": "/upload"
         }
     ],
     "resourceName": "amplifyTestApi",
@@ -34,5 +35,6 @@
                 "Arn"
             ]
         }
-    ]
+    ],
+    "uuid": "ea2c8740"
 }

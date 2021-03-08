@@ -30,7 +30,7 @@ function App() {
   
     // Request made to the backend api
     // Send formData objectconst apiName = 'MyApiName';
-    const path = '/report'; 
+    const path = '/upload'; 
     const myInit = { // OPTIONAL
       body: {
         name: selectedFile.name,
