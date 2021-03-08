@@ -44,7 +44,7 @@ def get_user_organization(identity):
 
 
 def handler(event, context):
-  print(body)
+  print(event)
   body = json.loads(event['input']['queryStringParameters'])
   organization = get_user_organization(event['requestContext']['identity'])
   presigned_url_details = get_s3_presigned_post_url(organization, body['name'])
