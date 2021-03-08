@@ -2,7 +2,6 @@ import json
 import os
 
 import boto3
-from botocore.exceptions import ClientError
 
 def get_s3_presigned_post_url(org, filename, expiry=3600):
     """
@@ -22,7 +21,8 @@ def get_s3_presigned_post_url(org, filename, expiry=3600):
             'upload_url': presigned_post['url'],
             'fields': presigned_post['fields']
         })
-    except ClientError:
+    except e:
+        print(e.message)
         return SimpleNamespace(
             success=False,
             error='Unable to upload PDF'
@@ -45,7 +45,7 @@ def get_user_organization(identity):
 
 def handler(event, context):
   body = json.loads(event['body'])
-  organization = event['requestContext']['identity']
+  organization = get_user_organization(event['requestContext']['identity'])
   presigned_url_details = get_s3_presigned_post_url(organization, body['name'])
   print(presigned_url_details)
   return {
