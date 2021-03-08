@@ -35,7 +35,7 @@ def get_user_organization(identity):
   user = client.get_user(AccessToken=identity['accessKey'])
   organization = None
   for attribute in user['UserAttributes']:
-    if attribute['Name'] = 'custom:organization':
+    if attribute['Name'] == 'custom:organization':
       organization = attribute['Value']
       break
   print(user)
