@@ -1,4 +1,3 @@
-import json
 import os
 
 import boto3
@@ -45,7 +44,7 @@ def get_user_organization(identity):
 
 def handler(event, context):
   print(event)
-  body = json.loads(event['queryStringParameters'])
+  body = event['queryStringParameters']
   organization = get_user_organization(event['requestContext']['identity'])
   presigned_url_details = get_s3_presigned_post_url(organization, body['name'])
   print(presigned_url_details)
