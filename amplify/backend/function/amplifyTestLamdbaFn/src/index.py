@@ -10,22 +10,24 @@ def get_s3_presigned_post_url(org, filename, expiry=3600):
     """
     key = '/'.join([org, filename])
     print(key)
-    try:
-        presigned_post = boto3.client('s3').generate_presigned_post(
-            os.environ['STORAGE_AMPLIFYTESTS3_BUCKETNAME'],
-            key,
-            ExpiresIn=expiry
-        )
-        return SimpleNamespace(success=True, data={
-            'upload_url': presigned_post['url'],
-            'fields': presigned_post['fields']
-        })
+      presigned_post = boto3.client('s3').generate_presigned_post(
+          os.environ['STORAGE_AMPLIFYTESTS3_BUCKETNAME'],
+          key,
+          ExpiresIn=expiry
+      )
+      return {
+        'success': True,
+        'data': {
+          'upload_url': presigned_post['url'],
+          'fields': presigned_post['fields']
+          }
+        }
     except Exception as e:
-        print(e.message)
-        return SimpleNamespace(
-            success=False,
-            error='Unable to upload PDF'
-        )
+        print(e)
+        return {
+          'success': False,
+          'error': 'Unable to upload PDF'
+        }
 
 
 def get_user_organization(identity):
