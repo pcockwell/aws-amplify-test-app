@@ -18,6 +18,10 @@ function App() {
         setUser(authData)
     });
   }, []);
+
+  const onFileChange = event => {
+    setSelectedFile(event.target.files[0])
+  }
     
   // On file upload (click the upload button)
   const onFileUpload = () => {  
@@ -34,6 +38,8 @@ function App() {
       }, // replace this with attributes you need
       headers: {}, // OPTIONAL
     };
+
+    console.log(myInit)
 
     API
       .put('amplifyTestApi', path, myInit)
@@ -69,25 +75,27 @@ function App() {
     }
   }
 
+  if (authState === AuthState.SignedIn && user) {
+    console.log(user)
+  }
+
   return authState === AuthState.SignedIn && user ? (
     <div className="App">
+      <AmplifySignOut />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <div>Hello, {user.username}</div>
-        </p>
+        <p>Hello, {user.attributes.email}</p>
         <h3>
           File Upload using React!
         </h3>
         <div>
-            <input type="file" onChange={setSelectedFile} />
+            <input type="file" onChange={onFileChange} />
             <button onClick={onFileUpload}>
               Upload!
             </button>
         </div>
-      {fileData()}
+        {fileData()}
       </header>
-      <AmplifySignOut />
     </div>
     ) : (
       <AmplifyAuthenticator>
