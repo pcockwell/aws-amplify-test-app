@@ -20,7 +20,7 @@ def get_s3_presigned_post_url(org, filename, expiry=3600):
             'upload_url': presigned_post['url'],
             'fields': presigned_post['fields']
         })
-    except as e:
+    except Exception as e:
         print(e.message)
         return SimpleNamespace(
             success=False,
