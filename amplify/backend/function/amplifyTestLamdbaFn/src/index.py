@@ -1,4 +1,5 @@
 import os
+import json
 
 import boto3
 
@@ -16,15 +17,11 @@ def get_s3_presigned_post_url(org, filename, expiry=3600):
         ExpiresIn=expiry
     )
     return {
-      'success': 'true',
-      'data': {
-        'upload_url': presigned_post['url'],
-        'fields': presigned_post['fields']
-      }
+      'upload_url': presigned_post['url'],
+      'fields': presigned_post['fields']
     }
   except Exception as e:
     return {
-      'success': 'false',
       'error': 'Unable to upload PDF'
     }
 
@@ -48,16 +45,12 @@ def handler(event, context):
   body = event['queryStringParameters']
   organization = get_user_organization(event['requestContext']['identity'])
   presigned_url_details = get_s3_presigned_post_url(organization, body['name'])
-  print('handler')
-  print(presigned_url_details)
-  response = {
+  return {
     'statusCode': 200,
     'headers': {
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Origin': 'https://main.dx0x4jcfvd33i.amplifyapp.com',
         'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
     },
-    'body': presigned_url_details
+    'body': json.dumps(presigned_url_details)
   }
-  print(response)
-  return response

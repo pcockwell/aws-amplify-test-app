@@ -41,8 +41,16 @@ function App() {
     API
       .get('amplifyTestApi', path, myInit)
       .then(response => {
-        console.log('Successful request. Response:');
-        console.log(response);
+        const options = {
+          headers: {
+            'Content-Type': selectedFile.type
+          }
+        };
+
+        return axios.put(response.data.upload_url, selectedFile, options);
+      })
+      .then(response => {
+        console.log(response)
       })
       .catch(error => {
         console.log(error.response);
@@ -75,6 +83,9 @@ function App() {
 
   if (authState === AuthState.SignedIn && user) {
     console.log(user)
+  }
+  if (selectedFile) {
+    console.log(selectedFile)
   }
 
   return authState === AuthState.SignedIn && user ? (
