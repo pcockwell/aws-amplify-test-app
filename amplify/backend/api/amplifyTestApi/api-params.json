@@ -1,16 +1,15 @@
 {
     "paths": [
         {
-            "name": "/upload",
+            "name": "/getUploadUrl",
             "lambdaFunction": "amplifyTestLamdbaFn",
             "privacy": {
                 "private": true,
                 "auth": [
-                    "/PUT",
-                    "/PATCH"
+                    "/GET"
                 ]
             },
-            "policyResourceName": "/upload"
+            "policyResourceName": "/getUploadUrl"
         }
     ],
     "resourceName": "amplifyTestApi",
@@ -21,7 +20,7 @@
         }
     ],
     "privacy": {
-        "auth": 1,
+        "auth": 2,
         "unauth": 0,
         "authRoleName": "amplify-awsamplifytestapp-dev-141444-authRole",
         "unAuthRoleName": "amplify-awsamplifytestapp-dev-141444-unauthRole"
@@ -36,5 +35,5 @@
             ]
         }
     ],
-    "uuid": "ea2c8740"
+    "uuid": "ed059ca9"
 }

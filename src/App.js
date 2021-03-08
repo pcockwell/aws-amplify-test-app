@@ -25,25 +25,23 @@ function App() {
     
   // On file upload (click the upload button)
   const onFileUpload = () => {  
-    // Details of the uploaded file
-    console.log(selectedFile);
-  
     // Request made to the backend api
     // Send formData objectconst apiName = 'MyApiName';
-    const path = '/upload'; 
+    const path = '/getUploadUrl'; 
     const myInit = { // OPTIONAL
-      body: {
+      response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+      queryStringParameters: {  // OPTIONAL
         name: selectedFile.name,
-        type: selectedFile.type,
-      }, // replace this with attributes you need
-      headers: {}, // OPTIONAL
+        type: selectedFile.type
+      },
     };
 
     console.log(myInit)
 
     API
-      .put('amplifyTestApi', path, myInit)
+      .get('amplifyTestApi', path, myInit)
       .then(response => {
+        console.log('Successful request. Response:');
         console.log(response);
       })
       .catch(error => {
