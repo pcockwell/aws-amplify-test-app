@@ -475,7 +475,7 @@
         
         
         
-      "DeploymentAPIGWamplifyTestApied059ca9": {
+      "DeploymentAPIGWamplifyTestApifc618532": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",

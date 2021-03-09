@@ -20,7 +20,7 @@
         }
     ],
     "privacy": {
-        "auth": 2,
+        "auth": 1,
         "unauth": 0,
         "authRoleName": "amplify-awsamplifytestapp-dev-141444-authRole",
         "unAuthRoleName": "amplify-awsamplifytestapp-dev-141444-unauthRole"
@@ -35,5 +35,5 @@
             ]
         }
     ],
-    "uuid": "ed059ca9"
+    "uuid": "fc618532"
 }
