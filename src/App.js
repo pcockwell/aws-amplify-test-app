@@ -48,7 +48,13 @@ function App() {
           }
         };
 
-        return axios.put(response.data.upload_url, selectedFile, options);
+        console.log(selectedFile)
+        const uploadData = {
+          file: selectedFile.src,
+          ...response.data.fields
+        };
+
+        return axios.post(response.data.upload_url, uploadData, options);
       })
       .then(response => {
         console.log(response)
