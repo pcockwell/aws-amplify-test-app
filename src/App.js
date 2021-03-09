@@ -97,8 +97,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello, {user.attributes.email}</p>
+        <p>Your organization is {user.attributes['custom:organization']}</p>
         <h3>
-          File Upload using React!
+          Select a file to upload
         </h3>
         <div>
             <input type="file" onChange={onFileChange} />

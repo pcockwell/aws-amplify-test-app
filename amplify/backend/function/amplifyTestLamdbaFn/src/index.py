@@ -27,7 +27,8 @@ def get_s3_presigned_post_url(org, filename, expiry=3600):
 
 
 def handler(event, context):
-  organization = event['authorizer']['claims']['custom:organization']
+  file_details = event['queryStringParameters']
+  organization = event['requestContext']['authorizer']['claims']['custom:organization']
   presigned_url_details = get_s3_presigned_post_url(organization, file_details['name'])
   return {
     'statusCode': 200,
