@@ -11,6 +11,7 @@ import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 function App() {
   const [authState, setAuthState] = useState();
   const [selectedFile, setSelectedFile] = useState();
+  const [uploadStatus, setUploadStatus] = useState('No File Selected');
   const [user, setUser] = useState();
 
   useEffect(() => {
@@ -22,6 +23,7 @@ function App() {
 
   const onFileChange = event => {
     setSelectedFile(event.target.files[0])
+    setUploadStatus('File Not Uploaded')
   }
     
   // On file upload (click the upload button)
@@ -39,9 +41,12 @@ function App() {
       },
     };
 
+    setUploadStatus('Requesting Pre-Signed Upload URL')
+
     API
       .get('amplifyTestApi', path, myInit)
       .then(response => {
+        setUploadStatus('Uploading to S3')
         const formData = new FormData();
         Object.keys(response.data.fields).forEach(key => {
           formData.append(key, response.data.fields[key]);
@@ -53,9 +58,11 @@ function App() {
         return axios.post(response.data.upload_url, formData);
       })
       .then(response => {
+        setUploadStatus('File Uploaded')
         console.log(response)
       })
       .catch(error => {
+        setUploadStatus('Upload Failed - See Developer Console')
         console.log(error.response);
      });
   };
@@ -71,7 +78,10 @@ function App() {
             Last Modified:{" "}
             {selectedFile.lastModifiedDate.toDateString()}
           </p>
-
+          <p>
+            Upload Status:{" "}
+            {uploadStatus}
+          </p>
         </div>
       );
     } else {
