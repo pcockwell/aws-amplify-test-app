@@ -18,7 +18,7 @@
       "function": {
         "amplifyTestLamdbaFn": {
           "deploymentBucketName": "amplify-awsamplifytestapp-dev-141444-deployment",
-          "s3Key": "amplify-builds/amplifyTestLamdbaFn-39434767456b5163415a-build.zip"
+          "s3Key": "amplify-builds/amplifyTestLamdbaFn-7a70724870566d76584e-build.zip"
         }
       }
     }

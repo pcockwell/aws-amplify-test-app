@@ -29,7 +29,7 @@ function App() {
     // Request made to the backend api
     // Send formData objectconst apiName = 'MyApiName';
     const path = '/getUploadUrl'; 
-    const token = await (await Auth.currentSession()).getIdToken().getJwtToken();
+    const token = user.getSignInUserSession().getIdToken().getJwtToken();
     const myInit = { // OPTIONAL
       headers: { Authorization: token },
       response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
