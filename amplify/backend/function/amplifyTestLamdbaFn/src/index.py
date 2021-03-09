@@ -26,25 +26,9 @@ def get_s3_presigned_post_url(org, filename, expiry=3600):
     }
 
 
-def get_user_organization(identity):
-  client = boto3.client('cognito-idp')
-  print(identity)
-  user = client.get_user(AccessToken=identity['accessKey'])
-  organization = None
-  for attribute in user['UserAttributes']:
-    if attribute['Name'] == 'custom:organization':
-      organization = attribute['Value']
-      break
-  print(user)
-  print(organization)
-  return organization
-
-
 def handler(event, context):
-#  file_details = event['queryStringParameters']
-  print(event)
-  organization = get_user_organization(event['requestContext']['identity'])
-#  presigned_url_details = get_s3_presigned_post_url(organization, file_details['name'])
+  organization = event['authorizer']['claims']['custom:organization']
+  presigned_url_details = get_s3_presigned_post_url(organization, file_details['name'])
   return {
     'statusCode': 200,
     'headers': {
@@ -52,5 +36,5 @@ def handler(event, context):
         'Access-Control-Allow-Origin': 'https://main.dx0x4jcfvd33i.amplifyapp.com',
         'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
     },
-#    'body': json.dumps(presigned_url_details)
+    'body': json.dumps(presigned_url_details)
   }

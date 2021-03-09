@@ -43,18 +43,18 @@ function App() {
 
     API
       .get('amplifyTestApi', path, myInit)
-      // .then(response => {
-      //   console.log(selectedFile)
-      //   const formData = new FormData();
-      //   Object.keys(response.data.fields).forEach(key => {
-      //     formData.append(key, response.data.fields[key]);
-      //   });
+      .then(response => {
+        console.log(selectedFile)
+        const formData = new FormData();
+        Object.keys(response.data.fields).forEach(key => {
+          formData.append(key, response.data.fields[key]);
+        });
 
-      //   // Actual file has to be appended last.
-      //   formData.append("file", selectedFile);
+        // Actual file has to be appended last.
+        formData.append("file", selectedFile);
 
-      //   return axios.post(response.data.upload_url, formData);
-      // })
+        return axios.post(response.data.upload_url, formData);
+      })
       .then(response => {
         console.log(response)
       })
