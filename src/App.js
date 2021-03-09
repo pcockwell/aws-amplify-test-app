@@ -15,8 +15,8 @@ function App() {
 
   useEffect(() => {
     return onAuthUIStateChange((nextAuthState, authData) => {
-        setAuthState(nextAuthState);
-        setUser(authData)
+      setAuthState(nextAuthState);
+      setUser(authData)
     });
   }, []);
 
@@ -39,12 +39,9 @@ function App() {
       },
     };
 
-    console.log(myInit)
-
     API
       .get('amplifyTestApi', path, myInit)
       .then(response => {
-        console.log(selectedFile)
         const formData = new FormData();
         Object.keys(response.data.fields).forEach(key => {
           formData.append(key, response.data.fields[key]);
@@ -114,15 +111,7 @@ function App() {
     </div>
     ) : (
       <AmplifyAuthenticator>
-        <AmplifySignUp
-          slot="sign-up"
-          usernameAlias="email"
-          formFields={[
-            { type: "email" },
-            { type: "password" },
-          ]}
-        />
-        <AmplifySignIn slot="sign-in" usernameAlias="email" />
+        <AmplifySignIn slot="sign-in" usernameAlias="email" hideSignUp />
       </AmplifyAuthenticator>
   );
 }
