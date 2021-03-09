@@ -42,19 +42,16 @@ function App() {
     API
       .get('amplifyTestApi', path, myInit)
       .then(response => {
-        const options = {
-          headers: {
-            'Content-Type': selectedFile.type
-          }
-        };
-
         console.log(selectedFile)
-        const uploadData = {
-          file: selectedFile.src,
-          ...response.data.fields
-        };
+        const formData = new FormData();
+        Object.keys(response.data.fields).forEach(key => {
+          formData.append(key, response.data.fields[key]);
+        });
 
-        return axios.post(response.data.upload_url, uploadData, options);
+        // Actual file has to be appended last.
+        formData.append("file", selectedFile);
+
+        return axios.post(response.data.upload_url, formData);
       })
       .then(response => {
         console.log(response)
